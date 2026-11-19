@@ -15,8 +15,8 @@ import {
   IonToolbar,
 } from '@ionic/angular';
 
-import type { EstadoSensor, LecturaAcelerometro } from '../../models/dispositivo.model';
-import { DispositivoService } from '../../services/dispositivo.service';
+import type { EstadoSensor, LecturaAcelerometro } from '../models/dispositivo.model';
+import { DispositivoService } from '../services/dispositivo.service';
 
 @Component({
   selector: 'app-tab4',

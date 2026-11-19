@@ -21,7 +21,7 @@ export const routes: Routes = [
       },
       {
         path: 'dispositivo',
-        loadComponent: () => import('../pages/tab4/tab4.page').then((m) => m.Tab4Page),
+        loadComponent: () => import('../tab4/tab4.page').then((m) => m.Tab4Page),
       },
       {
         path: '',
