@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Dispositivo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <main class="device">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="speedometer-outline" aria-hidden="true"></ion-icon>
+          Acelerómetro
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p class="status">
+          Estado:
+          <strong>
+            @switch (estadoSensor()) {
+              @case ('activo') { Activo }
+              @case ('no-disponible') { No disponible }
+              @case ('error') { Error }
+              @default { Inactivo }
+            }
+          </strong>
+        </p>
+
+        <div class="axes" aria-label="Lectura de ejes del acelerómetro">
+          <p><strong>X:</strong> {{ lectura().x }}</p>
+          <p><strong>Y:</strong> {{ lectura().y }}</p>
+          <p><strong>Z:</strong> {{ lectura().z }}</p>
+        </div>
+
+        @if (mensajeSensor()) {
+          <ion-note color="warning" role="alert">{{ mensajeSensor() }}</ion-note>
+        }
+
+        <div class="actions">
+          <ion-button
+            type="button"
+            [disabled]="estadoSensor() === 'activo'"
+            (click)="iniciarLectura()"
+          >
+            <ion-icon slot="start" name="play-outline" aria-hidden="true"></ion-icon>
+            Iniciar lectura
+          </ion-button>
+
+          <ion-button
+            type="button"
+            color="medium"
+            fill="outline"
+            [disabled]="estadoSensor() !== 'activo'"
+            (click)="detenerLectura()"
+          >
+            <ion-icon slot="start" name="stop-outline" aria-hidden="true"></ion-icon>
+            Detener lectura
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
+          Almacenamiento local
+        </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-input
+            label="Nombre del estudiante"
+            labelPlacement="stacked"
+            placeholder="Escribe tu nombre"
+            [ngModel]="nombreEstudiante()"
+            (ngModelChange)="nombreEstudiante.set($event)"
+          ></ion-input>
+        </ion-item>
+
+        <div class="actions">
+          <ion-button
+            type="button"
+            [disabled]="guardandoNombre()"
+            (click)="guardarNombre()"
+          >
+            <ion-icon slot="start" name="save-outline" aria-hidden="true"></ion-icon>
+            {{ guardandoNombre() ? 'Guardando...' : 'Guardar nombre' }}
+          </ion-button>
+        </div>
+
+        @if (mensajeAlmacenamiento()) {
+          <ion-note color="primary" role="status">{{ mensajeAlmacenamiento() }}</ion-note>
+        }
+
+        @if (nombreGuardado()) {
+          <p class="saved-name">
+            Nombre almacenado: <strong>{{ nombreGuardado() }}</strong>
+          </p>
+        }
+      </ion-card-content>
+    </ion-card>
+  </main>
+</ion-content>

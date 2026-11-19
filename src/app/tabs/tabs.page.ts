@@ -8,8 +8,13 @@ import {
   createOutline,
   homeOutline,
   peopleOutline,
+  personOutline,
   phonePortraitOutline,
+  playOutline,
+  saveOutline,
   schoolOutline,
+  speedometerOutline,
+  stopOutline,
   trashOutline,
 } from 'ionicons/icons';
 
@@ -33,6 +38,11 @@ export class TabsPage {
       createOutline,
       trashOutline,
       checkmarkCircleOutline,
+      speedometerOutline,
+      playOutline,
+      stopOutline,
+      personOutline,
+      saveOutline,
     });
   }
 }
