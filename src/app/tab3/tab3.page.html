@@ -5,11 +5,42 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-content>
-      <ion-icon name="people-outline" aria-hidden="true"></ion-icon>
-      <h1>Consulta de usuarios</h1>
-      <p>Este espacio está reservado para consultar la información de usuarios académicos.</p>
-    </ion-card-content>
-  </ion-card>
+  <main class="users">
+    <h1>Usuarios</h1>
+    <p>Consulta la información de los usuarios registrados.</p>
+
+    @if (cargando()) {
+    <div class="loading" role="status">
+      <ion-spinner aria-hidden="true"></ion-spinner>
+      <span>Cargando usuarios...</span>
+    </div>
+    } @else if (mensajeError()) {
+    <ion-card>
+      <ion-card-content>
+        <ion-note color="danger" role="alert">{{ mensajeError() }}</ion-note>
+        <ion-button expand="block" fill="outline" (click)="cargarUsuarios()">Reintentar</ion-button>
+      </ion-card-content>
+    </ion-card>
+    } @else if (usuarios().length === 0) {
+    <p>No hay usuarios para mostrar.</p>
+    } @else {
+    <ion-list>
+      @for (usuario of usuarios(); track usuario.id) {
+      <ion-card>
+        <ion-card-content>
+          <ion-item lines="none">
+            <ion-label>
+              <h2>{{ usuario.name }}</h2>
+              <p>@{{ usuario.username }}</p>
+            </ion-label>
+          </ion-item>
+          <p><strong>Correo:</strong> {{ usuario.email }}</p>
+          <p><strong>Teléfono:</strong> {{ usuario.phone }}</p>
+          <p><strong>Sitio web:</strong> {{ usuario.website }}</p>
+        </ion-card-content>
+      </ion-card>
+      }
+    </ion-list>
+    }
+  </main>
 </ion-content>
