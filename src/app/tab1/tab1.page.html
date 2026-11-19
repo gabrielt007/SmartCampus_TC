@@ -1,15 +1,71 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title> Tab 1 </ion-title>
+    <ion-title>SmartCampus</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <main class="home">
+    <section class="welcome">
+      <ion-icon name="school-outline" aria-hidden="true"></ion-icon>
+      <p class="eyebrow">Campus académico, conectado</p>
+      <h1>SmartCampus</h1>
+      <p class="date">{{ fechaActual }}</p>
+    </section>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Integrantes</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>Gabriel Toaquiza</p>
+        <p>Jossue Chulde</p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Acerca del proyecto</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        SmartCampus permite registrar actividades académicas, consultar usuarios y acceder a funciones del dispositivo
+        desde una aplicación móvil.
+      </ion-card-content>
+    </ion-card>
+
+    <h2>Módulos</h2>
+    <div class="module-grid">
+      <ion-card class="module-card" button routerLink="/tabs/inicio">
+        <ion-card-header>
+          <ion-icon name="home-outline" aria-hidden="true"></ion-icon>
+          <ion-card-title>Inicio</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>Resumen del proyecto y sus integrantes.</ion-card-content>
+      </ion-card>
+
+      <ion-card class="module-card" button routerLink="/tabs/actividades">
+        <ion-card-header>
+          <ion-icon name="book-outline" aria-hidden="true"></ion-icon>
+          <ion-card-title>Actividades</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>Registra y administra actividades académicas.</ion-card-content>
+      </ion-card>
+
+      <ion-card class="module-card" button routerLink="/tabs/usuarios">
+        <ion-card-header>
+          <ion-icon name="people-outline" aria-hidden="true"></ion-icon>
+          <ion-card-title>Usuarios</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>Acceso al módulo de consulta de usuarios.</ion-card-content>
+      </ion-card>
+
+      <ion-card class="module-card" button routerLink="/tabs/dispositivo">
+        <ion-card-header>
+          <ion-icon name="phone-portrait-outline" aria-hidden="true"></ion-icon>
+          <ion-card-title>Dispositivo</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>Acceso a las funciones del dispositivo móvil.</ion-card-content>
+      </ion-card>
+    </div>
+  </main>
 </ion-content>

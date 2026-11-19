@@ -1,0 +1,47 @@
+.home {
+  margin: 0 auto;
+  max-width: 760px;
+  padding: 1rem;
+}
+
+.welcome {
+  padding: 1.5rem 1rem;
+  text-align: center;
+}
+
+.welcome > ion-icon {
+  color: var(--ion-color-primary);
+  font-size: 3rem;
+}
+
+.welcome h1 {
+  margin: 0.25rem 0;
+  font-size: 2rem;
+}
+
+.eyebrow,
+.date {
+  color: var(--ion-color-medium);
+}
+
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  gap: 0.25rem;
+}
+
+.module-card {
+  margin: 0.25rem 0;
+}
+
+.module-card ion-card-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.module-card ion-icon {
+  color: var(--ion-color-primary);
+  font-size: 1.5rem;
+}

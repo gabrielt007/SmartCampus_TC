@@ -1,15 +1,136 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title> Tab 2 </ion-title>
+    <ion-title>Actividades académicas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <main class="activities">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title> {{ editandoId === null ? 'Registrar actividad' : 'Editar actividad' }} </ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <form [formGroup]="formulario" (ngSubmit)="guardarActividad()">
+          <ion-item>
+            <ion-input
+              formControlName="titulo"
+              label="Título"
+              labelPlacement="stacked"
+              placeholder="Ej. Proyecto Ionic"
+              required
+            ></ion-input>
+          </ion-item>
+          @if (formulario.controls.titulo.touched && formulario.controls.titulo.invalid) {
+          <ion-note color="danger">Ingresa un título.</ion-note>
+          }
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+          <ion-item>
+            <ion-textarea
+              formControlName="descripcion"
+              label="Descripción"
+              labelPlacement="stacked"
+              placeholder="Describe la actividad (mínimo 10 caracteres)"
+              [autoGrow]="true"
+              required
+            ></ion-textarea>
+          </ion-item>
+          @if (formulario.controls.descripcion.touched && formulario.controls.descripcion.invalid) {
+          <ion-note color="danger"> La descripción es obligatoria y debe tener al menos 10 caracteres. </ion-note>
+          }
+
+          <ion-item>
+            <ion-select
+              formControlName="tipo"
+              label="Tipo"
+              labelPlacement="stacked"
+              placeholder="Selecciona un tipo"
+              required
+            >
+              @for (tipo of tipos; track tipo) {
+              <ion-select-option [value]="tipo">{{ tipo }}</ion-select-option>
+              }
+            </ion-select>
+          </ion-item>
+          @if (formulario.controls.tipo.touched && formulario.controls.tipo.invalid) {
+          <ion-note color="danger">Selecciona un tipo de actividad.</ion-note>
+          }
+
+          <ion-item>
+            <ion-label position="stacked">Fecha de entrega</ion-label>
+            <ion-datetime
+              presentation="date"
+              locale="es-EC"
+              [value]="formulario.controls.fechaEntrega.value"
+              (ionChange)="onFechaChange($event)"
+            ></ion-datetime>
+          </ion-item>
+          @if (formulario.controls.fechaEntrega.touched && formulario.controls.fechaEntrega.invalid) {
+          <ion-note color="danger">Selecciona una fecha de entrega válida.</ion-note>
+          }
+
+          <ion-item lines="none">
+            <ion-label>Prioridad</ion-label>
+          </ion-item>
+          <ion-radio-group formControlName="prioridad">
+            @for (prioridad of prioridades; track prioridad) {
+            <ion-item>
+              <ion-radio [value]="prioridad" labelPlacement="end">{{ prioridad }}</ion-radio>
+            </ion-item>
+            }
+          </ion-radio-group>
+          @if (formulario.controls.prioridad.touched && formulario.controls.prioridad.invalid) {
+          <ion-note color="danger">Selecciona una prioridad.</ion-note>
+          }
+
+          <ion-item>
+            <ion-checkbox formControlName="completada" labelPlacement="end"> Completada </ion-checkbox>
+          </ion-item>
+
+          @if (mensajeError) {
+          <ion-note color="danger" role="alert">{{ mensajeError }}</ion-note>
+          }
+
+          <div class="form-actions">
+            <ion-button type="submit" [disabled]="guardando">
+              {{ guardando ? 'Guardando...' : editandoId === null ? 'Guardar actividad' : 'Actualizar actividad' }}
+            </ion-button>
+            @if (editandoId !== null) {
+            <ion-button type="button" fill="outline" (click)="limpiarFormulario()"> Cancelar edición </ion-button>
+            }
+          </div>
+        </form>
+      </ion-card-content>
+    </ion-card>
+
+    <section aria-labelledby="activity-list-title">
+      <h2 id="activity-list-title">Actividades registradas</h2>
+      @if (cargando) {
+      <p role="status">Cargando actividades...</p>
+      } @else if (actividades.length === 0) {
+      <p>Aún no hay actividades registradas.</p>
+      } @else { @for (actividad of actividades; track actividad.id) {
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ actividad.titulo }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{ actividad.descripcion }}</p>
+          <p>{{ actividad.tipo }} · {{ actividad.fechaEntrega }} · Prioridad {{ actividad.prioridad }}</p>
+          <p>{{ actividad.completada ? 'Completada' : 'Pendiente' }}</p>
+          <div class="form-actions">
+            <ion-button fill="outline" (click)="editarActividad(actividad)">
+              <ion-icon slot="start" name="create-outline"></ion-icon>
+              Editar
+            </ion-button>
+            <ion-button color="danger" fill="outline" (click)="confirmarEliminacion(actividad)">
+              <ion-icon slot="start" name="trash-outline"></ion-icon>
+              Eliminar
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      } }
+    </section>
+  </main>
 </ion-content>

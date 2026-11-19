@@ -1,0 +1,21 @@
+.activities {
+  margin: 0 auto;
+  max-width: 760px;
+  padding: 1rem;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+ion-note {
+  display: block;
+  margin: 0.25rem 1rem 0.75rem;
+}
+
+ion-datetime {
+  margin: 0.5rem auto;
+}
