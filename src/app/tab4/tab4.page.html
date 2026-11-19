@@ -8,20 +8,20 @@
   <main class="device">
     <ion-card>
       <ion-card-header>
-        <ion-card-title>
-          <ion-icon name="speedometer-outline" aria-hidden="true"></ion-icon>
-          Acelerómetro
-        </ion-card-title>
+        <ion-card-title>Acelerómetro</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <p class="status">
           Estado:
           <strong>
-            @switch (estadoSensor()) {
-              @case ('activo') { Activo }
-              @case ('no-disponible') { No disponible }
-              @case ('error') { Error }
-              @default { Inactivo }
+            @if (estadoSensor() === 'activo') {
+              Activo
+            } @else if (estadoSensor() === 'no-disponible') {
+              No disponible
+            } @else if (estadoSensor() === 'error') {
+              Error
+            } @else {
+              Inactivo
             }
           </strong>
         </p>
@@ -42,7 +42,6 @@
             [disabled]="estadoSensor() === 'activo'"
             (click)="iniciarLectura()"
           >
-            <ion-icon slot="start" name="play-outline" aria-hidden="true"></ion-icon>
             Iniciar lectura
           </ion-button>
 
@@ -53,7 +52,6 @@
             [disabled]="estadoSensor() !== 'activo'"
             (click)="detenerLectura()"
           >
-            <ion-icon slot="start" name="stop-outline" aria-hidden="true"></ion-icon>
             Detener lectura
           </ion-button>
         </div>
@@ -62,10 +60,7 @@
 
     <ion-card>
       <ion-card-header>
-        <ion-card-title>
-          <ion-icon name="person-outline" aria-hidden="true"></ion-icon>
-          Almacenamiento local
-        </ion-card-title>
+        <ion-card-title>Almacenamiento local</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <ion-item>
@@ -84,7 +79,6 @@
             [disabled]="guardandoNombre()"
             (click)="guardarNombre()"
           >
-            <ion-icon slot="start" name="save-outline" aria-hidden="true"></ion-icon>
             {{ guardandoNombre() ? 'Guardando...' : 'Guardar nombre' }}
           </ion-button>
         </div>

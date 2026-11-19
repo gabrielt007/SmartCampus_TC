@@ -8,7 +8,6 @@ import {
   IonCardTitle,
   IonContent,
   IonHeader,
-  IonIcon,
   IonInput,
   IonItem,
   IonNote,
@@ -33,7 +32,6 @@ import { DispositivoService } from '../../services/dispositivo.service';
     IonCardHeader,
     IonCardTitle,
     IonCardContent,
-    IonIcon,
     IonInput,
     IonItem,
     IonNote,
@@ -91,7 +89,7 @@ export class Tab4Page implements OnInit, OnDestroy {
   }
 
   detenerLectura(): void {
-    this.dispositivoService.detenerLecturaAcelerometro(); 
+    this.dispositivoService.detenerLecturaAcelerometro();
     if (this.estadoSensor() === 'activo') {
       this.estadoSensor.set('inactivo');
     }
